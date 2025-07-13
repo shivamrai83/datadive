@@ -280,7 +280,6 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                         ['John Doe', 30, 'john@example.com', 'Yes', '2024-01-15'],
                         ['Jane Smith', 25, 'jane@example.com', 'No', '2024-02-20']
                       ];
-                      
                       const ws = XLSX.utils.aoa_to_sheet(sampleData);
                       const wb = XLSX.utils.book_new();
                       XLSX.utils.book_append_sheet(wb, ws, 'Sample Data');
@@ -288,6 +287,12 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                     }}
                     className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                   >
+                    <Download className="w-4 h-4" />
+                    Download Template
+                  </button>
+                </div>
+              </div>
+
               {/* Instructions */}
               <div className="mt-6 p-4 bg-blue-50 rounded-xl">
                 <h4 className="font-medium text-blue-900 mb-2">Instructions:</h4>
@@ -310,7 +315,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                   </li>
                 </ul>
               </div>
-                    <Download className="w-4 h-4" />
+
               {/* Processing State */}
               {isProcessing && (
                 <div className="mt-6 p-4 bg-yellow-50 rounded-xl">
@@ -323,7 +328,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                   </div>
                 </div>
               )}
-                    Download Template
+
               {/* Error State */}
               {error && (
                 <div className="mt-6 p-4 bg-red-50 rounded-xl">
@@ -349,7 +354,6 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                   </p>
                 </div>
               </div>
-                  </button>
               {/* Fields Preview */}
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Detected Fields:</h4>
@@ -366,7 +370,6 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                   ))}
                 </div>
               </div>
-                </div>
               {/* Data Preview */}
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Data Preview (first 5 rows):</h4>
@@ -399,7 +402,6 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                     ... and {preview.data.length - 5} more rows
                   </p>
                 )}
-              </div>
               </div>
               {/* Import Actions */}
               <div className="flex items-center justify-between pt-4 border-t border-gray-200">
