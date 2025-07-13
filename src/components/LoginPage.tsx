@@ -78,7 +78,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             Welcome Back
           </h1>
           <p className="text-gray-600 text-lg">
-            Sign in to your Dynamic Field Builder
+            Sign in to your Data Dive
           </p>
         </div>
 

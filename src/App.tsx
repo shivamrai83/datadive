@@ -95,7 +95,7 @@ function App() {
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Dynamic Field Builder
+                  Data Dive
                 </h1>
                 <p className="text-sm text-gray-600">Create, analyze, and visualize your data</p>
               </div>
@@ -152,7 +152,12 @@ function App() {
           )}
           
           {activeTab === 'table' && (
-            <DataTable fields={fields} data={data} onDataChange={setData} />
+            <DataTable 
+              fields={fields} 
+              data={data} 
+              onDataChange={setData}
+              onFieldsChange={setFields}
+            />
           )}
           
           {activeTab === 'charts' && (

@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
-import { Plus, Edit3, Trash2, Check, X, Save } from 'lucide-react';
+import { Plus, Edit3, Trash2, Check, X, Save, Upload } from 'lucide-react';
 import { Field, TableRow } from '../types';
+import { ExcelUploader } from './ExcelUploader';
 
 interface DataTableProps {
   fields: Field[];
   data: TableRow[];
   onDataChange: (data: TableRow[]) => void;
+  onFieldsChange: (fields: Field[]) => void;
 }
 
-export const DataTable: React.FC<DataTableProps> = ({ fields, data, onDataChange }) => {
+export const DataTable: React.FC<DataTableProps> = ({ fields, data, onDataChange, onFieldsChange }) => {
   const [editingRowId, setEditingRowId] = useState<string | null>(null);
   const [isAddingRow, setIsAddingRow] = useState(false);
   const [newRow, setNewRow] = useState<Record<string, any>>({});
+  const [showExcelUploader, setShowExcelUploader] = useState(false);
+
+  const handleExcelImport = (importedFields: Field[], importedData: TableRow[]) => {
+    onFieldsChange(importedFields);
+    onDataChange(importedData);
+  };
 
   const addRow = () => {
     const row: TableRow = {
@@ -132,13 +140,22 @@ export const DataTable: React.FC<DataTableProps> = ({ fields, data, onDataChange
         <h2 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
           Data Table
         </h2>
-        <button
-          onClick={() => setIsAddingRow(true)}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-        >
-          <Plus className="w-4 h-4" />
-          Add Row
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowExcelUploader(true)}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <Upload className="w-4 h-4" />
+            Import Excel
+          </button>
+          <button
+            onClick={() => setIsAddingRow(true)}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <Plus className="w-4 h-4" />
+            Add Row
+          </button>
+        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -253,6 +270,14 @@ export const DataTable: React.FC<DataTableProps> = ({ fields, data, onDataChange
           <p className="text-gray-500 text-lg">No data yet</p>
           <p className="text-gray-400 text-sm">Add your first row to start building your dataset</p>
         </div>
+      )}
+
+      {/* Excel Uploader Modal */}
+      {showExcelUploader && (
+        <ExcelUploader
+          onDataImport={handleExcelImport}
+          onClose={() => setShowExcelUploader(false)}
+        />
       )}
     </div>
   );
