@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { Plus, X, Edit3, GripVertical, Check, AlertCircle } from 'lucide-react';
+import { Plus, X, Edit3, GripVertical, Check, AlertCircle, Upload } from 'lucide-react';
 import { Field } from '../types';
+import { ExcelUploader } from './ExcelUploader';
+import { TableRow } from '../types';
 
 interface FieldBuilderProps {
   fields: Field[];
   onFieldsChange: (fields: Field[]) => void;
+  onDataImport?: (fields: Field[], data: TableRow[]) => void;
 }
 
-export const FieldBuilder: React.FC<FieldBuilderProps> = ({ fields, onFieldsChange }) => {
+export const FieldBuilder: React.FC<FieldBuilderProps> = ({ fields, onFieldsChange, onDataImport }) => {
   const [isAddingField, setIsAddingField] = useState(false);
   const [editingFieldId, setEditingFieldId] = useState<string | null>(null);
+  const [showExcelUploader, setShowExcelUploader] = useState(false);
   const [newField, setNewField] = useState<Omit<Field, 'id'>>({
     name: '',
     type: 'text',
@@ -61,13 +65,24 @@ export const FieldBuilder: React.FC<FieldBuilderProps> = ({ fields, onFieldsChan
         <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Field Builder
         </h2>
-        <button
-          onClick={() => setIsAddingField(true)}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-        >
-          <Plus className="w-4 h-4" />
-          Add Field
-        </button>
+        <div className="flex items-center gap-3">
+          {onDataImport && (
+            <button
+              onClick={() => setShowExcelUploader(true)}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              <Upload className="w-4 h-4" />
+              Import Excel
+            </button>
+          )}
+          <button
+            onClick={() => setIsAddingField(true)}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <Plus className="w-4 h-4" />
+            Add Field
+          </button>
+        </div>
       </div>
 
       <div className="space-y-3">
@@ -197,6 +212,17 @@ export const FieldBuilder: React.FC<FieldBuilderProps> = ({ fields, onFieldsChan
           <p className="text-gray-500 text-lg">No fields yet</p>
           <p className="text-gray-400 text-sm">Add your first field to get started</p>
         </div>
+      )}
+
+      {/* Excel Uploader Modal */}
+      {showExcelUploader && onDataImport && (
+        <ExcelUploader
+          onDataImport={(importedFields, importedData) => {
+            onDataImport(importedFields, importedData);
+            setShowExcelUploader(false);
+          }}
+          onClose={() => setShowExcelUploader(false)}
+        />
       )}
     </div>
   );
