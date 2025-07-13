@@ -199,7 +199,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-[9999]">
       <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
@@ -220,7 +220,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
           </div>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
           {!preview ? (
             <div className="space-y-6">
               {/* Upload Area */}
@@ -231,7 +231,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                 className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ${
                   isDragging
                     ? 'border-blue-500 bg-blue-50'
-                    : 'border-gray-300 hover:border-gray-400'
+                    : 'border-gray-300 hover:border-gray-400 bg-white'
                 }`}
               >
                 <div className="space-y-4">
@@ -252,7 +252,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={isProcessing}
-                      className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                     >
                       <FileSpreadsheet className="w-5 h-5" />
                       {isProcessing ? 'Processing...' : 'Choose File'}
@@ -282,7 +282,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                   </div>
                   <button
                     onClick={downloadTemplate}
-                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                    className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors shadow-md hover:shadow-lg"
                   >
                     <Download className="w-4 h-4" />
                     Download Template
@@ -291,7 +291,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
               </div>
 
               {/* Instructions */}
-              <div className="bg-gray-50 rounded-xl p-6">
+              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
                 <h4 className="font-semibold text-gray-900 mb-3">Instructions:</h4>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-start gap-2">
@@ -411,7 +411,7 @@ export const ExcelUploader: React.FC<ExcelUploaderProps> = ({ onDataImport, onCl
                   </button>
                   <button
                     onClick={handleImport}
-                    className="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105"
+                    className="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
                   >
                     Import Data
                   </button>
