@@ -174,7 +174,7 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white/60 backdrop-blur-sm border-t border-white/20 mt-16">
+      {/* <footer className="bg-white/60 backdrop-blur-sm border-t border-white/20 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center text-gray-600">
             <p className="text-sm">
@@ -182,7 +182,7 @@ function App() {
             </p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
