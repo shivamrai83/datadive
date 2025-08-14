@@ -52,13 +52,6 @@ export const FieldBuilder: React.FC<FieldBuilderProps> = ({ fields, onFieldsChan
     onFieldsChange(fields.filter(field => field.id !== id));
   };
 
-  const moveField = (fromIndex: number, toIndex: number) => {
-    const updatedFields = [...fields];
-    const [movedField] = updatedFields.splice(fromIndex, 1);
-    updatedFields.splice(toIndex, 0, movedField);
-    onFieldsChange(updatedFields);
-  };
-
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6">
       <div className="flex items-center justify-between mb-6">
@@ -86,7 +79,7 @@ export const FieldBuilder: React.FC<FieldBuilderProps> = ({ fields, onFieldsChan
       </div>
 
       <div className="space-y-3">
-        {fields.map((field, index) => (
+        {fields.map((field) => (
           <div
             key={field.id}
             className="group bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-all duration-200"

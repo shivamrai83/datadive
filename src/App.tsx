@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Database, BarChart3, Table as TableIcon } from 'lucide-react';
 import { LoginPage } from './components/LoginPage';
 import { FieldBuilder } from './components/FieldBuilder';
@@ -68,9 +68,6 @@ function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('dynamicApp_authenticated');
-    // Optionally clear data
-    // localStorage.removeItem('dynamicApp_fields');
-    // localStorage.removeItem('dynamicApp_data');
   };
 
   if (!isAuthenticated) {
